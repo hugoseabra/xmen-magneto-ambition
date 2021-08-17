@@ -15,7 +15,7 @@ In this library we'll have to support to follow the contracts to create objects
 with the correct states to check whether a generic sequence inside a DNA is
 mutant.
 
-Check for [Genetics Library](library/gnetics/README.md)
+Check for [Genetics Library](library/genetics/README.md)
 
 ## Domain/Application Layers - Persistent Steps and Statistics
 
@@ -36,7 +36,7 @@ can have the following supports:
 ```http request
 ṔOST: /mutant
 
-{“dna”: ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]}
+{"dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]}
 ```
 Once the system received the data, it returns whether the sequence is correct
 as mutant or not, responding with the following statuses:
