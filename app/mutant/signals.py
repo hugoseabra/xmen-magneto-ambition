@@ -1,3 +1,4 @@
+import os.path
 import shutil
 from decimal import Decimal
 
@@ -22,7 +23,7 @@ def update_stats(instance, raw, created, **_):
         ratio = 0
 
     # Clean cache
-    if hasattr(settings, 'FILE_CACHE_DIR'):
+    if os.path.isdir(settings.FILE_CACHE_DIR):
         shutil.rmtree(settings.FILE_CACHE_DIR)
 
     try:

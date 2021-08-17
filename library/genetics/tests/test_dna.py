@@ -1,5 +1,5 @@
 from random import choice
-from unittest import TestCase
+from django.test import TestCase
 
 from library.genetics import (
     AminoAcid,
