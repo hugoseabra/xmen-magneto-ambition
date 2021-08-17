@@ -9,6 +9,7 @@ coverage = "*"
 [packages]
 Django = "3.2.5"
 python-decouple = "3.4"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,8 +1,13 @@
 from random import choice
 from unittest import TestCase
 
-from library.genetics import Analyser, AminoAcid, CodonPair, DNA, \
+from library.genetics import (
+    Analyser,
+    AminoAcid,
+    CodonPair,
+    DNA,
     InsufficientCodonPairsError
+)
 
 
 class AnalyserTests(TestCase):

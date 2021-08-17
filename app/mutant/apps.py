@@ -6,3 +6,7 @@ class MutantConfig(AppConfig):
     name = 'app.mutant'
     label = 'mutant'
     verbose_name = 'Mutant'
+
+    # noinspection PyUnresolvedReferences
+    def ready(self):
+        import app.mutant.signals

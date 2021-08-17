@@ -1,0 +1,20 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$nw1p0fl0gxpwpomVamdcBo$PuLeEErHoX5BrS75WWqcaw8u1xHVGo/XOEOwNWpdIl4=",
+      "last_login": "2021-08-17T03:07:20.224Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Flieber",
+      "last_name": "Admin",
+      "email": "admin@flieber.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-08-17T03:06:33Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
