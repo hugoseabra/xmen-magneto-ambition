@@ -1,0 +1,10 @@
+# Ambient
+venv
+.idea
+.env
+.coverage
+
+# Python
+**/__pycache__/*
+.pytest_cache
+*.pyc
