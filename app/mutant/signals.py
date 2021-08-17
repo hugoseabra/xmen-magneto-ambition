@@ -1,6 +1,7 @@
-import math
+import shutil
 from decimal import Decimal
 
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -19,6 +20,10 @@ def update_stats(instance, raw, created, **_):
         ratio = num_mutants / num_humans
     else:
         ratio = 0
+
+    # Clean cache
+    if hasattr(settings, 'FILE_CACHE_DIR'):
+        shutil.rmtree(settings.FILE_CACHE_DIR)
 
     try:
         stats = LogRequestStatistics.objects.get(pk=1)

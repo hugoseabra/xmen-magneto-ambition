@@ -1,5 +1,8 @@
 import json
 
+from django.forms.models import model_to_dict
+from django.conf import settings
+from cacheops import file_cache, CacheMiss
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 
@@ -68,14 +71,32 @@ class StatisticsViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
         queryset = self.get_queryset()
         model_class = StatisticsSerializer.Meta.model
 
+        instance = None
+
         try:
-            return queryset.get(pk=1)
-        except model_class.DoesNotExist:
-            return model_class(
-                count_human_dna=0,
-                count_mutant_dna=0,
-                ratio=0.0,
-            )
+            data = file_cache.get(settings.STATS_CACHE_KEY)
+            instance = model_class(**data)
+        except CacheMiss:
+            pass
+
+        if instance is None:
+            try:
+                instance = queryset.get(pk=1)
+            except model_class.DoesNotExist:
+                instance = model_class(
+                    count_human_dna=0,
+                    count_mutant_dna=0,
+                    ratio=0.0,
+                )
+
+            data = {
+                'count_human_dna': instance.count_human_dna,
+                'count_mutant_dna': instance.count_mutant_dna,
+                'ratio': instance.ratio
+            }
+            file_cache.set(settings.STATS_CACHE_KEY, data, timeout=60 * 60)
+
+        return instance
 
     def list(self, request, *args, **kwargs):
         instance = self.get_object()

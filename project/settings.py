@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import tempfile
 from pathlib import Path
 
 from decouple import config, Csv
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third party
+    'cacheops',
     'rest_framework',
 
     # APPS
@@ -130,3 +132,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'project', 'fixtures'),
 ]
+
+# ============================== CACHE ====================================== #
+CACHEOPS_DEFAULTS = {
+    'timeout': 60 * 60
+}
+
+FILE_CACHE_DIR = os.path.join(tempfile.gettempdir(), 'cacheops_file_cache')
+STATS_CACHE_KEY = 'mutant_stats'
