@@ -29,4 +29,4 @@ docker_build:
 .PHONY: docker_run # Runs docker container
 docker_run:
 	# The container will be destroyed as soon as it stops due to '--rm'
-	@docker run --rm --name $(PROJECT_NAME) -ti --env-file=$(ENV_FILE) -p 8002:8000 $(PROJECT_NAME)
+	@docker run --rm --name $(PROJECT_NAME) -ti --env-file=$(ENV_FILE) -v $(pwd)/db.sqlite3:/app/db.sqlite3 -p 8000:8000 $(PROJECT_NAME)

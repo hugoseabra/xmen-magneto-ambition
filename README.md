@@ -74,8 +74,9 @@ Set up pipenv software in you environment:
 
 * **Step 1:** clone the repository;
 * **Step 2:** rename file `.env-sample` to `.env`;
-* **Step 3:** run command `$ make db_up` to build database;
-* **Step 4:** run command `$ ./manage.py runserver` to start server;
+* **Step 3:** install dependencies `$ pipenv install [--dev]`;
+* **Step 4:** run command `$ make db_up` to build database;
+* **Step 5:** run command `$ ./manage.py runserver` to start server;
 
 Now you'll be able to make requests in the endpoints.
 
