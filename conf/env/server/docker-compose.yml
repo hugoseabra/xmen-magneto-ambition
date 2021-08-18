@@ -6,23 +6,20 @@ networks:
 
 services:
   magneto:
-    image: xmen-magneto-ambition:latest
+    image: hugoseabra19/xmen-magneto-ambition:latest
     restart: unless-stopped
     hostname: magneto
-    env_file: .env
+    env_file: ../../../.env
     ports:
       - "8000"
     networks:
       - net_lb
-    entrypoint:
-      - /app_conf/services/web.sh
     volumes:
-      - ./shared-volume/media:/code/media
+      - ../../../shared-volume/media:/code/media
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.magneto.rule=Host(`transportadora.hugoseabra.space`)"
-      - "traefik.http.routers.transportadora.entrypoints=web"
+      - "traefik.http.routers.magneto.rule=Host(`magneto.hugoseabra.space`)"
+      - "traefik.http.routers.magneto.entrypoints=web"
       - "traefik.protocol=http"
       - "traefik.docker.network=net_lb"
       - "traefik.frontend.passHostHeader=true"
-

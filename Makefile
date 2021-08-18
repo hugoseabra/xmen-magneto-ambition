@@ -1,6 +1,6 @@
 DJANGO_SETTINGS_MODULE=project.settings
 DOCKERFILE=conf/env/docker/Dockerfile
-PROJECT_NAME=xmen-magneto-ambition
+PROJECT_NAME=hugoseabra19/xmen-magneto-ambition
 ENV_FILE=.env
 
 .PHONY: help # Generate list of targets with descriptions
@@ -30,3 +30,7 @@ docker_build:
 docker_run:
 	# The container will be destroyed as soon as it stops due to '--rm'
 	@docker run --rm --name $(PROJECT_NAME) -ti --env-file=$(ENV_FILE) -v $(pwd)/db.sqlite3:/app/db.sqlite3 -p 8000:8000 $(PROJECT_NAME)
+
+.PHONY: docker_push # Pushes image to docker hub
+docker_push:
+	@docker push $(PROJECT_NAME)
