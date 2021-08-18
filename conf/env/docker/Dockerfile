@@ -18,10 +18,25 @@ LABEL indcare.image.name="xmen.magneto-ambition"
 RUN set -ex \
     && RUN_DEPS=" \
         nano \
+        curl \
+        mime-support \
         locales \
-        libpcre3 \
         postgresql-client \
         build-essential \
+        libpcre3 \
+        libpcre3-dev \
+        libxml2 \
+        libxml2-dev \
+        libpq-dev \
+        libtiff5-dev \
+        libjpeg62 \
+        libjpeg62-turbo-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
+        liblcms2-dev \
+        libwebp-dev \
+        libxslt-dev \
+        python-dev \
     " \
     && seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} \
     && apt-get update && apt-get install -y --no-install-recommends $RUN_DEPS \
@@ -38,26 +53,12 @@ COPY ./Pipfile /Pipfile
 # Install build deps, then run `pip install`, then remove unneeded build deps all in a single step.
 # Correct the path to your production requirements file, if needed.
 RUN set -ex \
-    && BUILD_DEPS=" \
-        build-essential \
-        libpcre3-dev \
-        libpq-dev \
-        libtiff5-dev \
-        libjpeg62 \
-        libjpeg62-turbo-dev \
-        zlib1g-dev \
-        libfreetype6-dev \
-        liblcms2-dev \
-        libwebp-dev \
-        libxml2-dev \
-        libxslt-dev \
-        python-dev \
-    " \
-    && seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} \
-    && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && pip3 install -U pip \
     # Django packs, after pip to avoid unnecessary download
-    && pip3 install --no-cache-dir -U gunicorn==20.0.4 pipenv \
+    && pip3 install --no-cache-dir -U \
+        pipenv \
+        uwsgi==2.0.18 \
+        django-uwsgi==0.2.2 \
     && pipenv lock --keep-outdated --requirements > requirements.txt \
     && pip3 install --no-cache-dir -r /requirements.txt \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
